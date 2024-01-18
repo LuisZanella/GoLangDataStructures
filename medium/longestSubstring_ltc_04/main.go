@@ -69,7 +69,7 @@ func isSubstringDistinct(word string, initialIndex int, lastIndex int) bool {
 		if booleanArray[int(word[i])] {
 			return false
 		}
-		booleanArray[i] = true
+		booleanArray[int(word[i])] = true
 	}
 	return true
 }
@@ -78,10 +78,8 @@ func maxSubStringLengthAndSplitWordInSubstrings(word string) int {
 	maxLength := 0
 	for i := 0; i < wordSize; i++ {
 		for j := i; j < wordSize; j++ {
-			if isSubstringDistinct(word, i, j) {
-				if maxLength < j-i+1 {
-					maxLength = j - i + 1
-				}
+			if isSubstringDistinct(word, i, j) && maxLength < j-i+1 {
+				maxLength = j - i + 1
 			}
 		}
 	}

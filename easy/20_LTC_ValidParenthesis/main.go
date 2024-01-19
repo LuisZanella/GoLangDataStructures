@@ -94,13 +94,16 @@ func areParenthesisValid_On(pattern string) bool {
 	for i := 0; i < len(pattern); i++ {
 		if value, ok := parenthesisMaper[pattern[i]]; ok {
 			dynamicArray = append(dynamicArray, value)
+			continue
 		}
 		if len(dynamicArray) == 0 {
 			return false
 		}
-		if parenthesisMaper[pattern[i]] == pattern[len(pattern)-1] {
-			pattern = pattern[:len(pattern)-1]
+		if pattern[i] != dynamicArray[len(dynamicArray)-1] {
+			return false
 		}
+
+		dynamicArray = dynamicArray[:len(dynamicArray)-1]
 	}
 	if len(dynamicArray) == 0 {
 		return true

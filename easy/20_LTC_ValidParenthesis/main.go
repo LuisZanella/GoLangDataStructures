@@ -87,9 +87,29 @@ func areParenthesisValid(word string) bool {
 	    return false
 	}
 */
+
+func areParenthesisValid_On(pattern string) bool {
+	parenthesisMaper := map[byte]byte{'(': ')', '[': ']', '{': '}'}
+	dynamicArray := make([]byte, 0)
+	for i := 0; i < len(pattern); i++ {
+		if value, ok := parenthesisMaper[pattern[i]]; ok {
+			dynamicArray = append(dynamicArray, value)
+		}
+		if len(dynamicArray) == 0 {
+			return false
+		}
+		if parenthesisMaper[pattern[i]] == pattern[len(pattern)-1] {
+			pattern = pattern[:len(pattern)-1]
+		}
+	}
+	if len(dynamicArray) == 0 {
+		return true
+	}
+	return false
+}
 func main() {
-	fmt.Println(areParenthesisValid("()"))
-	fmt.Println(areParenthesisValid("()[]{}"))
-	fmt.Println(areParenthesisValid("(]"))
-	fmt.Println(areParenthesisValid(")))]"))
+	fmt.Println(areParenthesisValid_On("()"))
+	fmt.Println(areParenthesisValid_On("()[]{}"))
+	fmt.Println(areParenthesisValid_On("(]"))
+	fmt.Println(areParenthesisValid_On(")))]"))
 }

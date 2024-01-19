@@ -35,28 +35,38 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func addValue(list *ListNode, value int) *ListNode {
-	newNode := &ListNode{Val: value}
-	if list == nil {
-		return newNode
-	}
-	helper := list.Next
-	list.Next.Val = value
-	list.Next.Next = helper
-	return list
-}
+//
+//func addValue(list *ListNode, value int) *ListNode {
+//	newNode := &ListNode{Val: value}
+//	if list == nil {
+//		return newNode
+//	}
+//	helper := list.Next
+//	list.Next.Val = value
+//	list.Next.Next = helper
+//	return list
+//}
 
 func mergeSortedLinkedList(firstList *ListNode, secondList *ListNode) *ListNode {
-	helper := firstList
-	for helper != nil || secondList != nil {
-		if secondList != nil && (helper == nil || secondList.Val > helper.Val) {
-			firstList = addValue(firstList, secondList.Val)
-			secondList = secondList.Next
+	helper := &ListNode{}
+	tail := helper
+	for firstList != nil && secondList != nil {
+		if firstList.Val < secondList.Val {
+			tail.Next = firstList
+			firstList = firstList.Next
 		} else {
-			helper = helper.Next
+			tail.Next = secondList
+			secondList = secondList.Next
 		}
+		tail = tail.Next
 	}
-	return firstList
+	if firstList != nil {
+		tail.Next = firstList
+	}
+	if secondList != nil {
+		tail.Next = secondList
+	}
+	return helper.Next
 }
 func main() {
 	l1_0 := &ListNode{Val: 10, Next: nil}

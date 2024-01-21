@@ -1,13 +1,22 @@
-package hello
+package main
 
-import "fmt"
+import (
+	"bytes"
+	"fmt"
+)
 
-func HelloWorld() string {
-	return "Hello, World"
-}
+const englishHelloPrefix = "Hello, "
+
 func WaveSomeone(name string) string {
-	return "Hello, " + name
+	var builder bytes.Buffer
+	builder.WriteString(englishHelloPrefix)
+	if len(name) == 0 {
+		builder.WriteString("World")
+	} else {
+		builder.WriteString(name)
+	}
+	return builder.String()
 }
 func main() {
-	fmt.Println(HelloWorld())
+	fmt.Println(WaveSomeone(""))
 }

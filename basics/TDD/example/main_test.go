@@ -1,9 +1,11 @@
-package hello
+package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestHelloWorld(t *testing.T) {
-	got := HelloWorld()
+	got := WaveSomeone("")
 	expected := "Hello, World"
 	if got != expected {
 		t.Errorf("Got: %s but was expecting: %s", got, expected)

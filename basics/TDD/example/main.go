@@ -5,18 +5,26 @@ import (
 	"fmt"
 )
 
-const englishHelloPrefix = "Hello, "
+var helloMap = map[string]string{"Spanish": "Hola", "French": "Bonjour", "English": "Hello"}
 
-func WaveSomeone(name string) string {
-	var builder bytes.Buffer
-	builder.WriteString(englishHelloPrefix)
-	if len(name) == 0 {
-		builder.WriteString("World")
+func helloLanguage(language string) string {
+	if val, ok := helloMap[language]; ok {
+		return val
 	} else {
-		builder.WriteString(name)
+		return helloMap["English"]
 	}
+}
+
+func WaveSomeone(name string, language string) string {
+	var builder bytes.Buffer
+	if name == "" {
+		name = "World"
+	}
+	builder.WriteString(helloLanguage(language))
+	builder.WriteString(", ")
+	builder.WriteString(name)
 	return builder.String()
 }
 func main() {
-	fmt.Println(WaveSomeone(""))
+	fmt.Println(WaveSomeone("", ""))
 }

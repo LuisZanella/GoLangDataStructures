@@ -36,6 +36,15 @@ Constraints:
 
 */
 //YOOOOO 10/10
+
+/*
+*
+
+	func lengthOfLastWord(s string) int {
+		s = strings.Trim(s, " ")
+		return len(s[strings.LastIndex(s, " ")+1:])
+	}
+*/
 func lengthOfLastWord(s string) int {
 	size := -1
 	for i := len(s) - 1; i >= 0; i-- {

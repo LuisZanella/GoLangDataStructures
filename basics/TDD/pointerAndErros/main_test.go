@@ -14,8 +14,9 @@ func TestWallet(t *testing.T) {
 	})
 	t.Run("WithDraw", func(t *testing.T) {
 		wallet := Wallet{Bitcoin(20)}
-		wallet.WithDraw(Bitcoin(10))
+		err := wallet.WithDraw(Bitcoin(10))
 		expect := Bitcoin(10)
+		assertNoError(t, err)
 		assertBalance(t, wallet, expect)
 	})
 	t.Run("Insufficient funds", func(t *testing.T) {
@@ -44,5 +45,11 @@ func assertError(t testing.TB, err error, expect error) {
 	}
 	if !errors.Is(err, expect) {
 		t.Errorf("got %q, expect %q", err, expect)
+	}
+}
+func assertNoError(t testing.TB, err error) {
+	t.Helper()
+	if err != nil {
+		t.Error("Not error should be trowed")
 	}
 }

@@ -42,7 +42,9 @@ func (d Dictionary) update(key string, value string) error {
 	}
 	return nil
 }
-
+func (d Dictionary) delete(key string) {
+	delete(d, key)
+}
 func (d Dictionary) add(key string, value string) error {
 	_, err := d.search(key)
 	if errors.Is(err, notFoundError) {

@@ -58,8 +58,17 @@ func TestUpdate(t *testing.T) {
 	})
 }
 
-func ()  {
-	
+func TestDelete(t *testing.T) {
+	t.Run("Delete a key", func(t *testing.T) {
+		word := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{word: definition}
+		dictionary.delete(word)
+		_, err := dictionary.search(word)
+		if err != notFoundError {
+			t.Errorf("Expectd %q to be deleted", word)
+		}
+	})
 }
 
 func assertString(t *testing.T, got string, expected string) {

@@ -1,4 +1,4 @@
-package clockface
+package clockFace
 
 import (
 	"math"
@@ -42,13 +42,14 @@ func TestSecondHandPoint(t *testing.T) {
 	}
 	for _, c := range cases {
 		t.Run(testName(c.time), func(t *testing.T) {
-			got := SecondHand(c.time)
+			got := SecondHandPoint(c.time)
 			if !roughlyEqualPoint(got, c.point) {
 				t.Errorf("Wanted: %v Got: %v", c.point, got)
 			}
 		})
 	}
 }
+
 func simpleTime(hours, minutes, seconds int) time.Time {
 	return time.Date(312, time.October, 28, hours, minutes, seconds, 0, time.UTC)
 }

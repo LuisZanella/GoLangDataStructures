@@ -1,6 +1,8 @@
 package main
 
-import "sync"
+import (
+	"sync"
+)
 
 type Counter struct {
 	mu    sync.Mutex
@@ -10,7 +12,6 @@ type Counter struct {
 func (c *Counter) Inc() {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-
 	c.value++
 }
 func (c *Counter) Value() int {

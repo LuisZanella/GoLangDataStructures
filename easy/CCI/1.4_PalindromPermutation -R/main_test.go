@@ -13,7 +13,11 @@ func TestIsPalindromePermutation(t *testing.T) {
 		value string
 		want  bool
 	}{
-		{"tact coa", true},
+		{"Tact coa", true},
+		{"Tact coaT", false},
+		{"", true},
+		{"Hello", true},
+		{"Tact coa---", true},
 	}
 	for _, c := range cases {
 		t.Run(c.value, func(t *testing.T) {

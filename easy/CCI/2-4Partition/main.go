@@ -6,7 +6,7 @@ type LinkedList struct {
 }
 
 func partition(list *LinkedList, target int) *LinkedList {
-	head := list
+	var head *LinkedList
 	tail := list
 	for list != nil {
 		next := list.next

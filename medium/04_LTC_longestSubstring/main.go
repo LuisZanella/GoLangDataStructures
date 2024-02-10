@@ -86,11 +86,20 @@ import (
 //}
 
 func maxSub(s string) int {
-
+	var m map[uint8]int
 	for l, r := 0; r < len(s); r++ {
-
+		if val, ok := m[s[r]]; ok {
+			l = maxNumber(l, r)
+		}
+		m[r] = maxNumber(r, m)
 	}
 	return 0
+}
+func maxNumber(n, m int) int {
+	if n < m {
+		return m
+	}
+	return n
 }
 func main() {
 	fmt.Println(maxSub("abcabcbb"))

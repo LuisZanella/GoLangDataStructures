@@ -86,14 +86,16 @@ import (
 //}
 
 func maxSub(s string) int {
-	var m map[uint8]int
-	for l, r := 0; r < len(s); r++ {
-		if val, ok := m[s[r]]; ok {
-			l = maxNumber(l, r)
+	var m = map[byte]int{}
+	var ms int
+	for l, r := 0, 0; r < len(s); r++ {
+		if index, ok := m[s[r]]; ok {
+			l = maxNumber(l, index)
 		}
-		m[r] = maxNumber(r, m)
+		ms = maxNumber(ms, r-l+1)
+		m[s[r]] = r + 1
 	}
-	return 0
+	return ms
 }
 func maxNumber(n, m int) int {
 	if n < m {

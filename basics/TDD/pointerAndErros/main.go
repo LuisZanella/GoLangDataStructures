@@ -33,3 +33,5 @@ func (w *Wallet) WithDraw(value Bitcoin) error {
 func (w *Wallet) Balance() Bitcoin {
 	return w.balance
 }
+
+//TEST

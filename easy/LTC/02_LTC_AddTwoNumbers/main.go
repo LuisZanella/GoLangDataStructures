@@ -35,8 +35,12 @@ func main() {
 		carry = sum / 10
 		quotient = sum % 10
 
-		current.nextNode = &Node{value: quotient}
-		current = current.nextNode
+		current.value = quotient
+		if (l1 != nil && l2 != nil) || carry > 0 {
+			current.nextNode = &Node{}
+			current = current.nextNode
+		}
+
 	}
 	printList(dummy)
 }

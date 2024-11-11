@@ -14,8 +14,11 @@ type Node struct {
 }
 
 func main() {
-	l1 := &Node{2, &Node{4, &Node{3, nil}}}
-	l2 := &Node{5, &Node{6, &Node{4, nil}}}
+	//l1 := &Node{2, &Node{4, &Node{3, nil}}}
+	//l2 := &Node{5, &Node{6, &Node{4, nil}}}
+
+	l1 := &Node{1, &Node{8, nil}}
+	l2 := &Node{0, nil}
 
 	dummy := &Node{}
 	current := dummy
@@ -36,11 +39,10 @@ func main() {
 		quotient = sum % 10
 
 		current.value = quotient
-		if (l1 != nil && l2 != nil) || carry > 0 {
+		if l1 != nil || l2 != nil || carry > 0 {
 			current.nextNode = &Node{}
 			current = current.nextNode
 		}
-
 	}
 	printList(dummy)
 }

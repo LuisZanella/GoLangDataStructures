@@ -1,5 +1,12 @@
 package main
 
+import (
+	"fmt"
+	"math"
+	"strings"
+	"unicode"
+)
+
 //**
 //8. String to Integer (atoi)
 //Medium
@@ -18,3 +25,43 @@ package main
 //should be rounded to 231 - 1.
 //Return the integer as the final result.
 //*/
+
+func main() {
+	fmt.Println(atoi("42"))              // Output: 42
+	fmt.Println(atoi("   -42"))          // Output: -42
+	fmt.Println(atoi("4193 with words")) // Output: 4193
+	fmt.Println(atoi("words and 987"))   // Output: 0
+	fmt.Println(atoi("-91283472332"))    // Output: -2147483648 (clamped)
+}
+
+func atoi(s string) int {
+	s = strings.TrimSpace(s)
+	if len(s) == 0 {
+		return 0
+	}
+	sign := 1
+	result := 0
+	index := 0
+	if s[index] == '-' {
+		sign = -1
+		index++
+	} else if s[index] == '+' {
+		index++
+	}
+
+	for index < len(s) && unicode.IsDigit(rune(s[index])) {
+		val := int(s[index] - '0')
+		result = result*10 + val
+
+		currentValue := sign * result
+		if currentValue < math.MinInt32 {
+			return math.MinInt32
+		}
+		if currentValue > math.MaxInt32 {
+			return math.MaxInt32
+		}
+
+		index++
+	}
+	return result * sign
+}

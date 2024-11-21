@@ -1,5 +1,7 @@
 package main
 
+import "strings"
+
 //12. Integer to Roman
 //Medium
 //Topics
@@ -8,13 +10,13 @@ package main
 //values:
 //
 //Symbol	Value
-//I	1
-//V	5
-//X	10
-//L	50
-//C	100
-//D	500
-//M	1000
+//I			1
+//V			5
+//X			10
+//L			50
+//C			100
+//D			500
+//M			1000
 //Roman numerals are formed by appending the conversions of decimal
 //place values from highest to lowest. Converting a decimal place value
 //into a Roman numeral has the following rules:
@@ -35,3 +37,23 @@ package main
 //multiple times. If you need to append a symbol 4 times use the
 //subtractive form.
 //Given an integer, convert it to a Roman numeral.
+
+func main() {
+
+}
+
+var values = []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+var symbols = []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+
+func IntToRoman(num int) string {
+	var result strings.Builder
+	if num <= 0 || num > 3999 {
+		return result.String()
+	}
+	for i, value := range values {
+		count := num / value
+		num %= value
+		result.WriteString(strings.Repeat(symbols[i], count))
+	}
+	return result.String()
+}

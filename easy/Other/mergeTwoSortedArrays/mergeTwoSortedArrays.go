@@ -72,13 +72,13 @@ func mergeArrays(array1 []interface{}, array2 []interface{}) (mergedArray []inte
 }
 
 // Doesn't Work
-// package main
+// package main.go
 
 // import (
 // 	f "fmt"
 // )
 
-// func main() {
+// func main.go() {
 // 	array2 := []string{"wa", "2ad"}
 // 	array1 := []int{1, 2, 3, 4}
 // 	f.Println(mergeArrays(array2, array1))

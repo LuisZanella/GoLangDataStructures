@@ -25,6 +25,7 @@ func main() {
 	fmt.Println(convert2("AB", 1))
 }
 
+
 func convert(s string, numRows int) string {
 	rows := make([]string, numRows)
 	direction := 1

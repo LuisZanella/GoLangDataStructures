@@ -1,5 +1,3 @@
-package main
-
 /**
 
 1(phone)|2(abc)		|3(def)
@@ -15,10 +13,50 @@ package main
 //does not map to any letters.
 //
 
-func main() {
+package main
 
+import (
+	"fmt"
+)
+
+func letterCombinations(digits string) []string {
+	if digits == "" {
+		return []string{}
+	}
+
+	// Mapping of digits to corresponding letters
+	digitToLetters := map[byte]string{
+		'2': "abc",
+		'3': "def",
+		'4': "ghi",
+		'5': "jkl",
+		'6': "mno",
+		'7': "pqrs",
+		'8': "tuv",
+		'9': "wxyz",
+	}
+
+	var result []string
+
+	var backtrack func(index int, path string)
+	backtrack = func(index int, path string) {
+		if index == len(digits) {
+			result = append(result, path)
+			return
+		}
+
+		letters := digitToLetters[digits[index]]
+		for i := 0; i < len(letters); i++ {
+			backtrack(index+1, path+string(letters[i]))
+		}
+	}
+
+	backtrack(0, "")
+	return result
 }
 
-func CombinePhoneNumber(digit int) string {
-
+func main() {
+	digits := "23"
+	combinations := letterCombinations(digits)
+	fmt.Println(combinations)
 }

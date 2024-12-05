@@ -19,40 +19,35 @@ import (
 	"fmt"
 )
 
+var phoneMap = map[rune][]string{
+	'2': {"a", "b", "c"},
+	'3': {"d", "e", "f"},
+	'4': {"g", "h", "i"},
+	'5': {"j", "k", "l"},
+	'6': {"m", "n", "o"},
+	'7': {"p", "q", "r", "s"},
+	'8': {"t", "u", "v"},
+	'9': {"w", "x", "y", "z"},
+}
+
 func letterCombinations(digits string) []string {
 	if digits == "" {
 		return []string{}
 	}
-
-	// Mapping of digits to corresponding letters
-	digitToLetters := map[byte]string{
-		'2': "abc",
-		'3': "def",
-		'4': "ghi",
-		'5': "jkl",
-		'6': "mno",
-		'7': "pqrs",
-		'8': "tuv",
-		'9': "wxyz",
-	}
-
 	var result []string
-
-	var backtrack func(index int, path string)
-	backtrack = func(index int, path string) {
-		if index == len(digits) {
-			result = append(result, path)
-			return
-		}
-
-		letters := digitToLetters[digits[index]]
-		for i := 0; i < len(letters); i++ {
-			backtrack(index+1, path+string(letters[i]))
-		}
-	}
-
-	backtrack(0, "")
+	backTracking(0, "", &digits, &result)
 	return result
+}
+
+func backTracking(index int, combination string, digits *string, result *[]string) {
+	if index == len(*digits) {
+		*result = append(*result, combination)
+		return
+	}
+	letters := phoneMap[rune((*digits)[index])]
+	for _, letter := range letters {
+		backTracking(index+1, combination+letter, digits, result)
+	}
 }
 
 func main() {

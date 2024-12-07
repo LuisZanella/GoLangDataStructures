@@ -20,7 +20,7 @@ import "fmt"
 
 var permutationsPosition map[string]int
 
-func generatePermutationsRecursive(str string, strIndex int) []string {
+func generatePermutationsRecursive(str string, strIndex int) {
 	var permutations []string
 	if len(str) == 1 {
 		permutationsPosition[str] = strIndex
@@ -40,7 +40,7 @@ func generatePermutationsRecursive(str string, strIndex int) []string {
 	return permutations
 }
 
-func findSubstring(s string, words []string) []int {
+func findSubstring(s string, words []string) (result []string) {
 	var startIndexes []int
 	for i, word := range words {
 		generatePermutationsRecursive(word, i)

@@ -18,47 +18,56 @@ import "fmt"
 //concatenated substrings in s. You can return the
 //answer in any order.
 
-var permutationsPosition map[string]int
+func FindSubstring(s string, words []string) (indexSubstrings []int) {
+	/*
+		validate input empty cases
+		generate HeatMap
+		createWindowSlicing
+			verify if window has the same as Heatmap
+			if yes, add to indexSubstrings
+		if no, continue next window
+	*/
+	if s == "" || len(words) == 0 || len(words[0]) == 0 {
+		return indexSubstrings
+	}
+	subWordLen := len(words[0])
+	subStringMinSize := subWordLen * len(words)
 
-func generatePermutationsRecursive(str string, strIndex int) {
-	var permutations []string
-	if len(str) == 1 {
-		permutationsPosition[str] = strIndex
-		return append(permutations, str)
+	if len(s) < subStringMinSize {
+		return indexSubstrings
 	}
 
-	for i, c := range str {
-		remaining := str[:i] + str[i+1:]
-		subPermutations := generatePermutationsRecursive(remaining, strIndex)
-
-		for _, p := range subPermutations {
-			permutationsPosition[string(c)+p] = strIndex
-			permutations = append(permutations, string(c)+p)
+	heatMap := make(map[string]int)
+	for _, word := range words {
+		heatMap[word]++
+	}
+	seenWords := make(map[string]int)
+	windowSize := len(s) - subStringMinSize
+	j := 0
+	for i := 0; i <= windowSize; i++ {
+		for seenWord := range seenWords {
+			delete(seenWords, seenWord)
+		}
+		for j < len(words) {
+			start := i + (j * subWordLen)
+			word := s[start : start+subWordLen]
+			if freq, exists := heatMap[word]; exists {
+				seenWords[word]++
+				if seenWords[word] > freq {
+					break
+				}
+			} else {
+				break
+			}
+			j++
+		}
+		if j == len(words) {
+			indexSubstrings = append(indexSubstrings, i)
 		}
 	}
-
-	return permutations
-}
-
-func findSubstring(s string, words []string) (result []string) {
-	var startIndexes []int
-	for i, word := range words {
-		generatePermutationsRecursive(word, i)
-	}
-	substringSize := len(words[0]) - 1
-	var left int
-	right := len(words[0]) - 1
-	for i := 0; i < substringSize; i++ {
-		subString := s[left:right]
-		if permutationsPosition[subString] != 0 {
-			startIndexes = append(startIndexes, permutationsPosition[subString]-1)
-		}
-		left += substringSize
-		right += substringSize
-	}
-	return startIndexes
+	return indexSubstrings
 }
 
 func main() {
-	fmt.Println(findSubstring("barfoothefoobarman", []string{"foo", "bar"}))
+	fmt.Println(FindSubstring("barfoothefoobarman", []string{"foo", "bar"}))
 }

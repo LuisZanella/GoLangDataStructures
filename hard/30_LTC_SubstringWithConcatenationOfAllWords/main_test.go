@@ -1,7 +1,7 @@
 package main
 
 import (
-	"reflect"
+	"slices"
 	"testing"
 )
 
@@ -27,7 +27,7 @@ func TestFindSubstring(t *testing.T) {
 
 func assertArrayHelper(t *testing.T, got, want []int) {
 	t.Helper()
-	if reflect.DeepEqual(got, want) {
+	if !slices.Equal(got, want) {
 		t.Errorf("got %v want %v", got, want)
 	}
 }

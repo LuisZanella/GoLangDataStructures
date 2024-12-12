@@ -3,7 +3,22 @@ package main
 import "fmt"
 
 func searchInsert(nums []int, target int) int {
-	return -1
+	l := 0
+	r := len(nums) -1
+
+	for l <= r {
+		m := l + (r-l)/2
+		if nums[m] > target {
+			r = m - 1
+		} else {
+			if nums[m] < target {
+				l = m + 1
+			} else {
+				return m
+			}
+		}
+	}
+	return l
 }
 
 func main() {

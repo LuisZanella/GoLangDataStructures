@@ -10,6 +10,7 @@ If target is not found in the array, return [-1, -1].
 
 You must write an algorithm with O(log n) runtime complexity.
 */
+
 func searchRange(nums []int, target int) (indexRange []int) {
 	start := searchFirstOrLastIndexInRange(nums, target, false)
 	if start == -1 {

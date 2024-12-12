@@ -1,9 +1,11 @@
 package main
+
 import (
 	"fmt"
 	"strconv"
 	"strings"
-	)
+)
+
 func compressStringChatGPT(text string) string {
 	var compressed bool = true
 	var compacted strings.Builder
@@ -21,7 +23,7 @@ func compressStringChatGPT(text string) string {
 			compressed = false
 		}
 	}
-	
+
 	compacted.WriteString(string(text[len(text)-1]))
 	compacted.WriteString(strconv.Itoa(count))
 
@@ -35,7 +37,7 @@ func myCompress(text string) string {
 	var compressed strings.Builder
 	counter := 0
 
-	for i:=0; i < len(text); i++ {
+	for i := 0; i < len(text); i++ {
 		counter++
 		if i+1 == len(text) || text[i] != text[i+1] {
 			compressed.WriteString(string(text[i]))
@@ -43,7 +45,7 @@ func myCompress(text string) string {
 				compressed.WriteString(strconv.Itoa(counter))
 			}
 			counter = 0
-		} 
+		}
 	}
 	compressedString := compressed.String()
 	if len(compressedString) <= len(text) {
@@ -55,7 +57,7 @@ func myCompress(text string) string {
 func main() {
 	result := compressStringChatGPT("aaBBcccDDDbbBBQddd")
 	fmt.Println("Result", result)
-	
+
 	result = compressStringChatGPT("abc")
 	fmt.Println("Result", result)
 
@@ -67,7 +69,7 @@ func main() {
 
 	result = myCompress("aaBBcccDDDbbBBQddd")
 	fmt.Println("Result", result)
-	
+
 	result = myCompress("abc")
 	fmt.Println("Result", result)
 

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//log all pairs of array
+// log all pairs of array
 var array = [5]string{"a", "b", "c", "d", "e"}
 
 func main() {

@@ -11,12 +11,15 @@ You must write a solution in O(log(m * n)) time complexity.
 */
 
 func searchMatrix(matrix [][]int, target int) bool {
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return false
+	}
 	m, n := len(matrix), len(matrix[0])
-	l, r := 0, (m*n)-1
+	l, r := 0, m*n-1
 	for l <= r {
 		m := l + (r-l)/2
-		row := m / 2
-		col := m % 2
+		row := m / n
+		col := m % n
 
 		if matrix[row][col] == target {
 			return true
